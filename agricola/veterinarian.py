@@ -78,17 +78,16 @@ def main():
     animalSet = originalAnimalSet
     numGames = 1000000
     numRounds = 14
-    resultSet = []
+    resultSet = [Stat(0, 0, 0)] * numRounds
     # SIMULATE
     timeStart = time.time()
     print 'Simulating {} games of {} rounds with animal set:'.format(numGames, numRounds)
     print originalAnimalSet
     for i in range(numGames):
-        resultSet.append(runOnce(animalSet, numRounds))
+        resultSet = map(sum, zip(resultSet, runOnce(animalSet, numRounds)))
     timeSimulate = time.time()
     # CALCULATE STATS
-    statsByRound = map(list, zip(*resultSet))
-    averageStats = map(lambda statRound: sum(statRound)/float(numGames), statsByRound)
+    averageStats = map(lambda x: x/float(numGames), resultSet)
     timeCalculate = time.time()
     print '--- SUMMARY ---'
     for i in range(numRounds-1, -1, -1):
