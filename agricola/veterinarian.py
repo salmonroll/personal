@@ -87,7 +87,7 @@ def main():
         resultSet = map(sum, zip(resultSet, runOnce(animalSet, numRounds)))
     timeSimulate = time.time()
     # CALCULATE STATS
-    averageStats = map(lambda x: x/float(numGames), resultSet)
+    averageStats = [x / float(numGames) for x in resultSet]
     timeCalculate = time.time()
     print '--- SUMMARY ---'
     for i in range(numRounds-1, -1, -1):
